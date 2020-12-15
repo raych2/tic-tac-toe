@@ -9,7 +9,7 @@ const gameBoard = (() => {
         container.style.gridTemplateColumns = `repeat(3, 1fr)`;
         for(let i = 0; i < gameBoardArr.length; i++) {
             let square = document.createElement('div');
-            square.dataset.order = i;
+            square.id= i;
             square.classList.add('empty');
             container.append(square);
         }
@@ -41,11 +41,13 @@ const game = (() => {
         if(currentPlayer === null) {
             currentPlayer = playerOne;
         } else if (currentPlayer === playerOne) {
-            board[`${e.target.dataset.order}`] = playerOne.mark;
+            board[`${e.target.id}`] = playerOne.mark;
+            displayController.displayMarkers();
             e.target.removeEventListener('click', play);
             currentPlayer = playerTwo;
         } else {
-            board[`${e.target.dataset.order}`] = playerTwo.mark;
+            board[`${e.target.id}`] = playerTwo.mark;
+            displayController.displayMarkers();
             e.target.removeEventListener('click', play);
             currentPlayer = playerOne;
         }
@@ -55,3 +57,17 @@ const game = (() => {
         square.addEventListener('click', play);
     });
 })();
+
+const displayController = (() => {
+    const board = gameBoard.gameBoardArr;
+
+    function displayMarkers() {
+        for(let i = 0; i < board.length; i++) {
+            let square = document.getElementById(`${i}`);
+            square.innerText = board[i];
+        }
+    }
+
+    return {displayMarkers}
+})();
+

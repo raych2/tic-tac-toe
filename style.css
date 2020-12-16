@@ -16,3 +16,6 @@ h1 {
 .empty {
     border: 1px solid #000000;
 }
+.winner {
+    text-align: center;
+}

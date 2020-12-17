@@ -33,7 +33,6 @@ const playerTwo = Player('playerTwo', 'O');
 
 const game = (() => {
     const squares = document.querySelectorAll('.empty');
-    const gameWinner = document.querySelector('.winner');
     const board = gameBoard.gameBoardArr;
     let currentPlayer;
     let winner;
@@ -45,6 +44,7 @@ const game = (() => {
             board[`${e.target.id}`] = playerTwo.mark;
             displayController.displayMarkers();
             e.target.removeEventListener('click', play);
+            isTie();
             findWinner();
             currentPlayer = playerOne;
         } else {
@@ -52,6 +52,7 @@ const game = (() => {
             board[`${e.target.id}`] = playerOne.mark;
             displayController.displayMarkers();
             e.target.removeEventListener('click', play);
+            isTie();
             findWinner();
             currentPlayer = playerTwo;
         }
@@ -60,22 +61,30 @@ const game = (() => {
     const findWinner = () => {
         if(getHorizontalWin() || getVerticalWin() || getDiagonalWin()) {
             endGame();
-            gameWinner.innerText = `The winner is ${winner.name}! Play again!`
+            displayController.gameWinner.innerText = `The winner is ${winner.name}! Play again!`
         }
     }
 
-    const determineWin = (firstSpace, secondSpace, thirdSpace) => {
-        if(firstSpace === secondSpace && secondSpace === thirdSpace) {
-            if(firstSpace === 'X') {
+    const determineWin = (firstSquare, secondSquare, thirdSquare) => {
+        if(firstSquare === secondSquare && secondSquare === thirdSquare) {
+            if(firstSquare === 'X') {
                 currentPlayer = playerOne;
                 winner = currentPlayer;
-            } else if(firstSpace === 'O') {
+            } else if(firstSquare === 'O') {
                 currentPlayer = playerTwo;
                 winner = currentPlayer;
             }
         }
         return winner;
     }
+    
+    const isTie = () => {
+        if (!board.includes('')) {
+            endGame();
+            displayController.gameWinner.innerText = `It's a tie! There is no winner! Play again!`
+        }
+    }
+
     const getHorizontalWin = () => {
         let firstRow = determineWin(board[0], board[1], board[2]);
         let secondRow = determineWin(board[3], board[4], board[5]);
@@ -109,13 +118,14 @@ const game = (() => {
 
 const displayController = (() => {
     const board = gameBoard.gameBoardArr;
+    const gameWinner = document.querySelector('.winner');
 
-    function displayMarkers() {
+    const displayMarkers = () => {
         for(let i = 0; i < board.length; i++) {
             let square = document.getElementById(`${i}`);
             square.innerText = board[i];
         }
     }
 
-    return {displayMarkers}
+    return {gameWinner, displayMarkers}
 })();

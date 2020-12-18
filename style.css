@@ -6,6 +6,11 @@
 h1 {
     text-align: center;
 }
+.start {
+    display: block;
+    text-align: center;
+    margin: 25px auto;
+}
 .container {
     height: 500px;
     width: 500px;

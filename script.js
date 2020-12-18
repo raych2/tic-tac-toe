@@ -25,7 +25,7 @@ gameBoard.renderGameBoard();
 const Player = (name, mark) => {
     const getName = () => name;
     const getMark = () => mark;
-    return {name, mark};
+    return { name, mark };
 }
 
 const playerOne = Player('playerOne', 'X');
@@ -77,7 +77,7 @@ const game = (() => {
         }
         return winner;
     }
-    
+
     const isTie = () => {
         if (!board.includes('')) {
             endGame();
@@ -111,14 +111,21 @@ const game = (() => {
         });
     }
 
-    squares.forEach(square => {
-        square.addEventListener('click', play);
-    });
+    const startGame = () => {
+        squares.forEach(square => {
+            square.addEventListener('click', play);
+        });
+    }
+    return {
+        startGame
+    };
 })();
 
 const displayController = (() => {
     const board = gameBoard.gameBoardArr;
+    const container = document.querySelector('.container');
     const gameWinner = document.querySelector('.winner');
+    const start = document.querySelector('.start');
 
     const displayMarkers = () => {
         for(let i = 0; i < board.length; i++) {
@@ -127,5 +134,11 @@ const displayController = (() => {
         }
     }
 
-    return {gameWinner, displayMarkers}
+    
+    start.addEventListener('click', game.startGame);
+
+    return {
+        gameWinner, 
+        displayMarkers
+    }
 })();

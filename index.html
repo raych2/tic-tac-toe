@@ -8,8 +8,20 @@
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
-    <button type="button" class="start">Start Game</button>
-    <div class="container"></div>
+    <form class="players-form">
+        <div class="playerOne">
+            <h2>Player One</h2>
+            <input type="text" id="pOne" name="pOneName" placeholder="Player One"/>
+        </div>
+        <div class="playerTwo">
+            <h2>Player Two</h2>
+            <input type="text" id="pTwo" name="pTwoName" placeholder="Player Two"/>
+        </div>
+        <button type="submit" id="submit" class="start">Start Game</button>
+    </form>
+    <div class="container">
+        <div class="gameboard"></div>
+    </div>
     <div class="winner"></div>
     <script src="script.js"></script>
 </body>

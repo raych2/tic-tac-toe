@@ -6,12 +6,23 @@
 h1 {
     text-align: center;
 }
+.playerOne {
+    float: left;
+    margin-left: 200px;
+}
+.playerTwo{
+    float: right;
+    margin-right: 200px;
+}
 .start {
     display: block;
     text-align: center;
     margin: 25px auto;
 }
 .container {
+    display: none;
+}
+.gameboard {
     height: 500px;
     width: 500px;
     margin: 0 auto;

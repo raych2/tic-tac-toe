@@ -1,17 +1,17 @@
 const gameBoard = (() => {
-    const container = document.querySelector('.container');
+    const gameboard = document.querySelector('.gameboard');
     
     const gameBoardArr = ['','','','','','','','',''];
 
     const renderGameBoard = () => {
-        container.style.display = 'grid';
-        container.style.gridTemplateRows = `repeat(3, 1fr)`;
-        container.style.gridTemplateColumns = `repeat(3, 1fr)`;
+        gameboard.style.display = 'grid';
+        gameboard.style.gridTemplateRows = `repeat(3, 1fr)`;
+        gameboard.style.gridTemplateColumns = `repeat(3, 1fr)`;
         for(let i = 0; i < gameBoardArr.length; i++) {
             let square = document.createElement('div');
             square.id= i;
             square.classList.add('empty');
-            container.append(square);
+            gameboard.append(square);
         }
     }
     return {
@@ -28,8 +28,8 @@ const Player = (name, mark) => {
     return { name, mark };
 }
 
-const playerOne = Player('playerOne', 'X');
-const playerTwo = Player('playerTwo', 'O');
+let playerOne = Player('playerOne', 'X');
+let playerTwo = Player('playerTwo', 'O');
 
 const game = (() => {
     const squares = document.querySelectorAll('.empty');
@@ -61,7 +61,7 @@ const game = (() => {
     const findWinner = () => {
         if(getHorizontalWin() || getVerticalWin() || getDiagonalWin()) {
             endGame();
-            displayController.gameWinner.innerText = `The winner is ${winner.name}! Play again!`
+            displayController.gameWinner.innerText = `The winner is ${winner.name}! Play again!`;
         }
     }
 
@@ -81,7 +81,7 @@ const game = (() => {
     const isTie = () => {
         if (!board.includes('')) {
             endGame();
-            displayController.gameWinner.innerText = `It's a tie! There is no winner! Play again!`
+            displayController.gameWinner.innerText = `It's a tie! There is no winner! Play again!`;
         }
     }
 
@@ -111,20 +111,16 @@ const game = (() => {
         });
     }
 
-    const startGame = () => {
-        squares.forEach(square => {
-            square.addEventListener('click', play);
-        });
-    }
-    return {
-        startGame
-    };
+    squares.forEach(square => {
+        square.addEventListener('click', play);
+    });
 })();
 
 const displayController = (() => {
-    const board = gameBoard.gameBoardArr;
     const container = document.querySelector('.container');
+    const board = gameBoard.gameBoardArr;
     const gameWinner = document.querySelector('.winner');
+    const form = document.querySelector('.players-form');
     const start = document.querySelector('.start');
 
     const displayMarkers = () => {
@@ -134,11 +130,21 @@ const displayController = (() => {
         }
     }
 
-    
-    start.addEventListener('click', game.startGame);
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        pOneInput = document.getElementById('pOne');
+        pTwoInput = document.getElementById('pTwo');
+        playerOneName = pOneInput.value || pOneInput.getAttribute('placeholder');
+        playerTwoName = pTwoInput.value || pOneInput.getAttribute('placeholder');
+        playerOne = Player(playerOneName, 'X');
+        playerTwo = Player(playerTwoName, 'O');
+        container.style.display = 'block';
+        start.style.display = 'none';
+    });
 
     return {
-        gameWinner, 
+        gameWinner,
+        start,
         displayMarkers
     }
 })();

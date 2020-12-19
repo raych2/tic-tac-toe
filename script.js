@@ -23,8 +23,6 @@ const gameBoard = (() => {
 gameBoard.renderGameBoard();
 
 const Player = (name, mark) => {
-    const getName = () => name;
-    const getMark = () => mark;
     return { name, mark };
 }
 
@@ -33,14 +31,15 @@ let playerTwo = Player('playerTwo', 'O');
 
 const game = (() => {
     const squares = document.querySelectorAll('.empty');
-    const board = gameBoard.gameBoardArr;
+    const reset = document.querySelector('.reset');
+    let board = gameBoard.gameBoardArr;
     let currentPlayer;
     let winner;
 
     const play = (e) => {
         if(currentPlayer === null) {
             currentPlayer = playerOne;
-        } else if (currentPlayer === playerTwo) {
+        } else if(currentPlayer === playerTwo) {
             board[`${e.target.id}`] = playerTwo.mark;
             displayController.displayMarkers();
             e.target.removeEventListener('click', play);
@@ -81,7 +80,7 @@ const game = (() => {
     const isTie = () => {
         if (!board.includes('')) {
             endGame();
-            displayController.gameWinner.innerText = `It's a tie! There is no winner! Play again!`;
+            displayController.gameWinner.innerText = `It's a tie! Play again!`;
         }
     }
 
@@ -109,11 +108,25 @@ const game = (() => {
         squares.forEach(square => {
             square.removeEventListener('click', play);
         });
+        reset.style.display = 'block';
     }
 
+    const resetGame = () => {
+        currentPlayer = null;
+        winner = null;
+        displayController.gameWinner.innerText = '';
+        reset.style.display = 'none';
+        squares.forEach((square, index) => {
+            square.addEventListener('click', play);
+            square.innerText = '';
+            board[index] = '';
+        });
+    }
+    
     squares.forEach(square => {
         square.addEventListener('click', play);
     });
+    return { resetGame };
 })();
 
 const displayController = (() => {
@@ -122,6 +135,7 @@ const displayController = (() => {
     const gameWinner = document.querySelector('.winner');
     const form = document.querySelector('.players-form');
     const start = document.querySelector('.start');
+    const reset = document.querySelector('.reset');
 
     const displayMarkers = () => {
         for(let i = 0; i < board.length; i++) {
@@ -142,9 +156,10 @@ const displayController = (() => {
         start.style.display = 'none';
     });
 
+    reset.addEventListener('click', game.resetGame);
+
     return {
         gameWinner,
-        start,
         displayMarkers
     }
 })();

@@ -35,3 +35,8 @@ h1 {
 .winner {
     text-align: center;
 }
+.reset {
+    display: none;
+    text-align: center;
+    margin: 25px auto;
+}

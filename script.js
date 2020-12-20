@@ -4,9 +4,6 @@ const gameBoard = (() => {
     const gameBoardArr = ['','','','','','','','',''];
 
     const renderGameBoard = () => {
-        gameboard.style.display = 'grid';
-        gameboard.style.gridTemplateRows = `repeat(3, 1fr)`;
-        gameboard.style.gridTemplateColumns = `repeat(3, 1fr)`;
         for(let i = 0; i < gameBoardArr.length; i++) {
             let square = document.createElement('div');
             square.id= i;
@@ -60,7 +57,7 @@ const game = (() => {
     const findWinner = () => {
         if(getHorizontalWin() || getVerticalWin() || getDiagonalWin()) {
             endGame();
-            displayController.gameWinner.innerText = `The winner is ${winner.name}! Play again!`;
+            displayController.gameWinner.innerText = `${winner.name} wins! Play again!`;
         }
     }
 
@@ -133,7 +130,7 @@ const displayController = (() => {
     const container = document.querySelector('.container');
     const board = gameBoard.gameBoardArr;
     const gameWinner = document.querySelector('.winner');
-    const form = document.querySelector('.players-form');
+    const form = document.querySelector('.playersForm');
     const start = document.querySelector('.start');
     const reset = document.querySelector('.reset');
 

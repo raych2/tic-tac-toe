@@ -3,40 +3,108 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    background-color: #d9d9d9;
+    color: #ffa464;
+}
 h1 {
+    margin-top: 25px;
+    font-family: 'Bungee Outline', cursive;
+    font-size: 4.5em;
+    text-align: center;
+}
+.playerOne, .playerTwo, .empty, .winner {
+    font-family: 'Noto Sans JP', sans-serif;
     text-align: center;
 }
 .playerOne {
     float: left;
-    margin-left: 200px;
+    margin: -40px 0 0 100px;
 }
 .playerTwo{
     float: right;
-    margin-right: 200px;
+    margin: -40px 100px 0 0;
+}
+#pOne, #pTwo{
+    background: transparent no-repeat;
+    fill: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #720026;
 }
 .start {
     display: block;
     text-align: center;
-    margin: 25px auto;
+    margin: 150px auto 0 auto;
+    padding: 10px;
+    background: transparent no-repeat;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    outline: none;
+    color: #ffa464;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 2em;
+    font-weight: 400;
+}
+.start:hover {
+    background-color: #FFFFFF;
+    color: #ffa464;
 }
 .container {
     display: none;
 }
 .gameboard {
-    height: 500px;
-    width: 500px;
-    margin: 0 auto;
-    border: 1px solid #000000;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2px;
+    height: 450px;
+    width: 450px;
+    margin: 15px auto 5px auto;
     text-align: center;
 }
 .empty {
-    border: 1px solid #000000;
-}
+    background-color: #ce4257;
+    border-radius: 5px;;
+    font-size: 6em;
+    font-weight: 700;
+} 
 .winner {
-    text-align: center;
+    font-size: 2em;
 }
 .reset {
     display: none;
     text-align: center;
-    margin: 25px auto;
+    margin: 10px auto 0 auto;
+    padding: 10px;
+    background: transparent no-repeat;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    outline: none;
+    color: #ffa464;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+}
+.reset:hover {
+    background-color: #FFFFFF;
+    color: #ffa464;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #720026;
+  -webkit-box-shadow: 0 0 0px 1000px #d9d9d9 inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

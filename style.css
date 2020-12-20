@@ -13,7 +13,7 @@ h1 {
     font-size: 4.5em;
     text-align: center;
 }
-.playerOne, .playerTwo, .empty, .winner {
+.playerOne, .playerTwo, .empty, .turn, .winner {
     font-family: 'Noto Sans JP', sans-serif;
     text-align: center;
 }
@@ -72,6 +72,9 @@ h1 {
     border-radius: 5px;;
     font-size: 6em;
     font-weight: 700;
+}
+.turn {
+    font-size: 2em;
 } 
 .winner {
     font-size: 2em;

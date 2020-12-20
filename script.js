@@ -36,6 +36,7 @@ const game = (() => {
     const play = (e) => {
         if(currentPlayer === null) {
             currentPlayer = playerOne;
+            displayController.playerTurn.innerText = `${playerOne.name}'s turn`; 
         } else if(currentPlayer === playerTwo) {
             board[`${e.target.id}`] = playerTwo.mark;
             displayController.displayMarkers();
@@ -43,6 +44,7 @@ const game = (() => {
             isTie();
             findWinner();
             currentPlayer = playerOne;
+            displayController.playerTurn.innerText = `${playerOne.name}'s turn`; 
         } else {
             currentPlayer = playerOne;
             board[`${e.target.id}`] = playerOne.mark;
@@ -51,6 +53,7 @@ const game = (() => {
             isTie();
             findWinner();
             currentPlayer = playerTwo;
+            displayController.playerTurn.innerText = `${playerTwo.name}'s turn`; 
         }
     }
 
@@ -102,6 +105,7 @@ const game = (() => {
     }
 
     const endGame = () => {
+        displayController.playerTurn.style.display = 'none';
         squares.forEach(square => {
             square.removeEventListener('click', play);
         });
@@ -111,6 +115,8 @@ const game = (() => {
     const resetGame = () => {
         currentPlayer = null;
         winner = null;
+        displayController.playerTurn.style.display = 'block';
+        displayController.playerTurn.innerText = `${playerOne.name}'s turn`; 
         displayController.gameWinner.innerText = '';
         reset.style.display = 'none';
         squares.forEach((square, index) => {
@@ -130,6 +136,7 @@ const displayController = (() => {
     const container = document.querySelector('.container');
     const board = gameBoard.gameBoardArr;
     const gameWinner = document.querySelector('.winner');
+    const playerTurn = document.querySelector('.turn');
     const form = document.querySelector('.playersForm');
     const start = document.querySelector('.start');
     const reset = document.querySelector('.reset');
@@ -146,17 +153,19 @@ const displayController = (() => {
         pOneInput = document.getElementById('pOne');
         pTwoInput = document.getElementById('pTwo');
         playerOneName = pOneInput.value || pOneInput.getAttribute('placeholder');
-        playerTwoName = pTwoInput.value || pOneInput.getAttribute('placeholder');
+        playerTwoName = pTwoInput.value || pTwoInput.getAttribute('placeholder');
         playerOne = Player(playerOneName, 'X');
         playerTwo = Player(playerTwoName, 'O');
         container.style.display = 'block';
         start.style.display = 'none';
+        displayController.playerTurn.innerText = `${playerOne.name}'s turn`; 
     });
 
     reset.addEventListener('click', game.resetGame);
 
     return {
         gameWinner,
+        playerTurn,
         displayMarkers
     }
 })();

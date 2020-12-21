@@ -8,22 +8,26 @@ body {
     color: #ffa464;
 }
 h1 {
-    margin-top: 25px;
+    margin-top: 20px;
     font-family: 'Bungee Outline', cursive;
     font-size: 4.5em;
     text-align: center;
 }
-.playerOne, .playerTwo, .empty, .turn, .winner {
+.playersForm {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.playerOne, .playerTwo {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.playerOne, .playerTwo, .empty, .start, .turn, .winner, .reset {
     font-family: 'Noto Sans JP', sans-serif;
     text-align: center;
-}
-.playerOne {
-    float: left;
-    margin: -40px 0 0 100px;
-}
-.playerTwo{
-    float: right;
-    margin: -40px 100px 0 0;
 }
 #pOne, #pTwo{
     background: transparent no-repeat;
@@ -37,17 +41,17 @@ h1 {
     color: #720026;
 }
 .start {
-    display: block;
-    text-align: center;
-    margin: 150px auto 0 auto;
+    display: flex;
+    flex-basis: 70%;
+    justify-content: center;
+    margin: 20px auto;
     padding: 10px;
     background: transparent no-repeat;
     border: 1px solid #FFFFFF;
     border-radius: 5px;
     outline: none;
     color: #ffa464;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 400;
 }
 .start:hover {
@@ -64,7 +68,7 @@ h1 {
     grid-gap: 2px;
     height: 450px;
     width: 450px;
-    margin: 15px auto 5px auto;
+    margin: 10px auto;
     text-align: center;
 }
 .empty {
@@ -74,14 +78,13 @@ h1 {
     font-weight: 700;
 }
 .turn {
-    font-size: 2em;
+    font-size: 1.5em;
 } 
 .winner {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .reset {
     display: none;
-    text-align: center;
     margin: 10px auto 0 auto;
     padding: 10px;
     background: transparent no-repeat;
@@ -89,7 +92,6 @@ h1 {
     border-radius: 5px;
     outline: none;
     color: #ffa464;
-    font-family: 'Noto Sans JP', sans-serif;
     font-size: 1em;
     font-weight: 400;
 }
@@ -111,3 +113,38 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #d9d9d9 inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+@media (max-width: 688px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    .playersForm {
+        display: flex;
+        flex-direction: column;
+        margin: 10px auto;
+        max-width: 90%;
+    }
+    .playerOne, .playerTwo {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 5px auto;
+        font-size: 0.75em;
+    }
+    #pOne, #pTwo {
+        width: 200px;
+        text-align: right;
+    }
+    .gameboard {
+      max-height: 90%;
+      max-width: 90%;
+    }
+    .start {
+        display: flex;
+        margin-top: 50px;
+        font-size: 1em;
+    }
+    .turn, .winner {
+        font-size: 1em;
+    }
+  }
